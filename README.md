@@ -16,3 +16,5 @@ Telehealth Demo using Project M's Image Recognition Model
 ### Notes
 
 1. Use virtual environments when downloading packages. Guide can be found at https://packaging.python.org/guides/installing-using-pip-and-virtual-environments/
+
+2. Use the ```dev``` branch to modify changes
