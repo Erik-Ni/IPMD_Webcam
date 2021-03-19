@@ -5,6 +5,7 @@ __pycache__/
 env/
 cloudsqlproxy.cmd
 *.sqlite3
+IPMD_webcam/
 
 # Elastic Beanstalk Files
 .elasticbeanstalk/*
