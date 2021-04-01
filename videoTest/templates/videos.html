@@ -1,0 +1,11 @@
+<html>
+<div>
+
+{% for video in videos %}
+<video width="500" height="500" controls >
+<source src="{{video.video.url}}" type="video/mp4">
+<b>{{video.title}}</b>
+</video>
+
+</div>
+</html
