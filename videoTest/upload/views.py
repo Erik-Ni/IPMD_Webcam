@@ -6,23 +6,23 @@ from .models import Videos
 
 def upload_video(request):
 
-    if request.method == 'POST':
+	if request.method == 'POST':
 
-        title = request.POST['title']
-        video = request.POST['video']
+		title = request.POST['title']
+		video = request.POST['video']
 
-        content = Videos(title=title,video=video)
-        content.save()
-        return redirect('home')
+		content = Videos(title=title,video=video)
+		content.save()
+		return redirect('home')
 
-    return render(request,'upload.html')
+	return render(request,'upload.html')
 
 
 def display(request):
 
-    videos = Videos.objects.all()
-    context ={
-        'videos':videos,
-    }
+	videos = Videos.objects.all()
+	context ={
+		'videos':videos,
+	}
 
-    return render(request,'videos.html',context)
+	return render(request,'videos.html',context)
