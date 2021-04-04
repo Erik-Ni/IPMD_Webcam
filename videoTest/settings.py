@@ -14,7 +14,7 @@ import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
+#PROJECT_DIR = os.path.dirname(os.path.abspath(__file__))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
@@ -25,7 +25,7 @@ SECRET_KEY = 'si52v%*7s@m^ef#8evsrrmmowxh=rvzf5bioe*mrctl_h2@5i)'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -37,6 +37,7 @@ INSTALLED_APPS = [
 	'django.contrib.sessions',
 	'django.contrib.messages',
 	'django.contrib.staticfiles',
+	'videoTest.upload',
 	'emotion_detector'
 ]
 
@@ -67,6 +68,18 @@ TEMPLATES = [
 		},
 	},
 ]
+
+# Static files (CSS, JavaScript, Images)
+# https://docs.djangoproject.com/en/3.0/howto/static-files/
+
+STATIC_URL = '/static/'
+STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
+STATIC_ROOT = os.path.join(BASE_DIR,'assets')
+
+# MEDIA FILES
+
+MEDIA_URL ='/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR,'media')
 
 WSGI_APPLICATION = 'videoTest.wsgi.application'
 
@@ -114,14 +127,7 @@ USE_L10N = True
 
 USE_TZ = True
 
-
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/3.0/howto/static-files/
-
-STATIC_URL = '/static/'
-
-
 # directory to files:
-EMOTION_MODEL = "modules/emotion_models/emotion03152021.h5"
+EMOTION_MODEL = "modules/emotion_models/emotion.h5"
 DEPLOY_PROTOTXT_TXT = "modules/face_models/deploy.prototxt.txt"
 RES_CAFFE_MODEL = "modules/face_models/res10_300x300_ssd_iter_140000.caffemodel"

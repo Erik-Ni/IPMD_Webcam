@@ -6,7 +6,7 @@ from emotion_detector.apps import EmotionDetectorConfig
 
 emotions = ['Anger', 'Contempt', 'Disgust', 'Fear', 'Happy', 'Neutral', 'Sad', 'Surprise']
 
-def emotion_mood_detect(image, faces, predicted_emotion, prediction_result):
+def emotion_mood_detect(image, faces, predicted_emotion):
 	if image is not None and faces is not None and len(faces) > 0:
 		for face in faces:
 			try:
@@ -27,6 +27,6 @@ def emotion_mood_detect(image, faces, predicted_emotion, prediction_result):
 				pass
 			
 			cv2.putText(image, predicted_emotion, (int(left), int(up)), cv2.FONT_HERSHEY_SIMPLEX, 1, (0,0,255), 2)
-			cv2.putText(image, prediction_result, (5, 15), cv2.FONT_HERSHEY_SIMPLEX, 0.35, (0,0,255), 1)
+			# cv2.putText(image, prediction_result, (5, 15), cv2.FONT_HERSHEY_SIMPLEX, 0.35, (0,0,255), 1)
 
-	return image, predicted_emotion, prediction_result
+	return image, predicted_emotion

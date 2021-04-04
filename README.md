@@ -10,8 +10,9 @@ Telehealth Demo using Project M's Image Recognition Model
 ### How to Run
 
 1. ```pip3 install -r requirements.txt``` to install packages
-2. ```python3 manage.py runserver``` to run the file on your local machine
-3. add more steps if needed here
+2. Add all models needed in settings.py
+3. ```python3 manage.py runserver``` to run the file on your local machine
+4. add more steps if needed here
 
 ### Notes
 

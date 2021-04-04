@@ -4,11 +4,11 @@ __pycache__/
 */.DS_Store
 env/
 cloudsqlproxy.cmd
-*.sqlite3
 IPMD_webcam/
-*.h5
-Pipfile
+
 # Elastic Beanstalk Files
 .elasticbeanstalk/*
 !.elasticbeanstalk/*.cfg.yml
 !.elasticbeanstalk/*.global.yml
+*.sqlite3
+Pipfile
