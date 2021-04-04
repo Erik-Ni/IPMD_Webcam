@@ -28,9 +28,9 @@ urlpatterns = [
 	url(r'^$', views.index_view, name='index'),
 	url(r'^livefeed/$', views.livefeed, name='video_feed'),
 	url(r'^make_rectangle/$', views.make_rectangle, name='rect'),
-	path('upload/',upload_video,name='upload'),
-	path('videos/',display,name='videos'),
+	path('upload/', upload_video, name='upload'),
+	path('videos/', display, name='videos'),
 ]
 
-urlpatterns += static(settings.STATIC_URL,document_root=settings.STATIC_ROOT)
-urlpatterns += static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
+urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
