@@ -26,8 +26,8 @@ from django.conf import settings
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', views.index_view, name='index'),
-    url(r'^livefeed/$', views.livefeed, name='video_feed'),
-    url(r'^make_rectangle/$', views.make_rectangle, name='rect'),
+    url('livefeed/', views.livefeed, name='video_feed'),
+    url('stop_feed/', views.stop_feed, name='video_stop'),
     path('upload/',upload_video,name='upload'),
     path('videos/',display,name='videos'),
 ]

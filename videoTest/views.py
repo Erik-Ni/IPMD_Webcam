@@ -34,13 +34,15 @@ class VideoCamera(object):
 global_camera = VideoCamera()
 
 def gen(camera):
+    i = 0
     while True:
         frame = camera.get_frame()
+        i+=1
         yield(b'--frame\r\n'
               b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n\r\n')
 
-def video_stop(request):
-    cv2.rectangle(global_camera.frame, (0, 0), (255, 255), (255, 0, 0), 2)
+def stop_feed(request):
+    global_camera.__del__()
 
 def make_rectangle(request):
     global_camera.rect = 1
