@@ -1,12 +1,12 @@
 from tensorflow.keras.models import load_model
 import cv2
 import numpy as np
-
+from django.conf import settings
 from emotion_detector.apps import EmotionDetectorConfig 
 
-emotions = ['Anger', 'Contempt', 'Disgust', 'Fear', 'Happy', 'Neutral', 'Sad', 'Surprise']
+emotions = settings.EMOTION_LISTS
 
-def emotion_mood_detect(image, faces, predicted_emotion):
+def emotion_mood_detect(image, faces, top_data, all_data):
 	if image is not None and faces is not None and len(faces) > 0:
 		for face in faces:
 			try:
@@ -20,13 +20,17 @@ def emotion_mood_detect(image, faces, predicted_emotion):
 				predictions = EmotionDetectorConfig.model.predict(temp_output)
 
 				if len(predictions):
-					prediction_result = str(predictions[0])
-					max_index = np.argmax(predictions[0])
-					predicted_emotion = emotions[max_index]
+					top_index = np.argmax(predictions[0])
+					top_data[0] = emotions[top_index]
+					top_data[1] = str(int(predictions[0][top_index] * 100))
+
+					for i in range(len(emotions)):
+						all_data[emotions[i]] += predictions[0][i]
+					all_data["count"] += 1
+
 			except:
 				pass
 			
-			cv2.putText(image, predicted_emotion, (int(left), int(up)), cv2.FONT_HERSHEY_SIMPLEX, 1, (0,0,255), 2)
-			# cv2.putText(image, prediction_result, (5, 15), cv2.FONT_HERSHEY_SIMPLEX, 0.35, (0,0,255), 1)
+			cv2.putText(image, "{}: {}%".format(top_data[0], top_data[1]), (int(left), int(up)), cv2.FONT_HERSHEY_SIMPLEX, 1, (0,0,255), 2)
 
-	return image, predicted_emotion
+	return image

@@ -1,13 +1,16 @@
 from django.shortcuts import render
 from django.views.decorators import gzip
 from django.http import StreamingHttpResponse
+from django.conf import settings
+
 import time
 import cv2
 import threading
+from collections import defaultdict
 
 from modules.face_detect import face_detect
 from modules.emotion_mood_detect import emotion_mood_detect
-
+from modules.save_logs import print_data_to_file
 
 def index_view(request):
 	return render(request, 'index.html')
@@ -15,9 +18,10 @@ def index_view(request):
 class VideoCamera(object):
 	rect = 0
 	def __init__(self):
-		self.original_time = round(time.time(), 2)
-		self.predicted_emotion = "Neutral"
-		# self.prediction_result = ""
+		self.original_time = time.time()
+		self.top_data = ["Neutral", "100"]
+		self.all_data = defaultdict(float)
+		self.saved_time = 0
 
 		self.video = cv2.VideoCapture(0)
 		(self.grabbed, self.frame) = self.video.read()
@@ -36,14 +40,23 @@ class VideoCamera(object):
 		while True:
 			(self.grabbed, self.frame) = self.video.read()
 
-			self.frame, self.faces = face_detect(self.frame, self.predicted_emotion)
+			self.frame, self.faces = face_detect(self.frame, self.top_data)
 
-			time_span = round(time.time(), 2) - self.original_time
-			time_span = int(round(time_span, 2) * 100)
+			cur_time = time.time()
+			ntime_span = int(round(cur_time - self.original_time, 2)  * 100)
+			time_span = int(round(cur_time - self.original_time, 0))
 
-			if time_span % 10 == 0:
-				self.frame, self.predicted_emotion = emotion_mood_detect(self.frame, self.faces, self.predicted_emotion)
+			if ntime_span % settings.NUM_FRAMES_TO_DETECT == 0:
+				self.frame = emotion_mood_detect(self.frame, self.faces, self.top_data, self.all_data)
 
+			if time_span % settings.NUM_SECONDS_TO_SAVE == 0 and self.saved_time != time_span:
+				log = {}
+				emotions = settings.EMOTION_LISTS
+				for i in range(len(emotions)):
+					log[emotions[i]] = int(round(self.all_data[emotions[i]] / self.all_data["count"], 2) * 100)
+				print_data_to_file(cur_time, log)
+				self.all_data = defaultdict(float)
+				self.saved_time = time_span
 			# How to make rectangle: cv2.rectangle(self.frame, (startX, startY), (endX, endY), Color: (R, G, B), Width)
 
 def gen(camera):
