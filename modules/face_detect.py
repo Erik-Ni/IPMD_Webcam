@@ -8,7 +8,7 @@ DEPLOY_PROTOTXT_TXT = os.path.join(settings.BASE_DIR, settings.DEPLOY_PROTOTXT_T
 RES_CAFFE_MODEL = os.path.join(settings.BASE_DIR, settings.RES_CAFFE_MODEL)
 net = cv2.dnn.readNetFromCaffe(DEPLOY_PROTOTXT_TXT, RES_CAFFE_MODEL)
 
-def face_detect(image, predicted_emotion):
+def face_detect(image, top_data):
 	faces = []
 
 	if image is not None and net is not None:
@@ -52,8 +52,6 @@ def face_detect(image, predicted_emotion):
 						faces.append([left, up, right, bottom])
 
 						cv2.rectangle(image, (left, up), (right, bottom), green, thickness=line_thick)
-						cv2.putText(image, predicted_emotion, (int(left), int(up)), cv2.FONT_HERSHEY_SIMPLEX, 1, (0,0,255), 2)
-						# cv2.putText(image, prediction_result, (5, 15), cv2.FONT_HERSHEY_SIMPLEX, 0.35, (0,0,255), 1)
-
+						cv2.putText(image, "{}: {}%".format(top_data[0], top_data[1]), (int(left), int(up)), cv2.FONT_HERSHEY_SIMPLEX, 1, (0,0,255), 2)
 
 	return image, faces
