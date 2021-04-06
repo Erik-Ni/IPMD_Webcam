@@ -131,3 +131,7 @@ USE_TZ = True
 EMOTION_MODEL = "modules/emotion_models/emotion.h5"
 DEPLOY_PROTOTXT_TXT = "modules/face_models/deploy.prototxt.txt"
 RES_CAFFE_MODEL = "modules/face_models/res10_300x300_ssd_iter_140000.caffemodel"
+EMOTION_FILE = "modules/emotion_file.txt"
+EMOTION_LISTS = ['Anger', 'Contempt', 'Disgust', 'Fear', 'Happy', 'Neutral', 'Sad', 'Surprise']
+NUM_FRAMES_TO_DETECT = 10
+NUM_SECONDS_TO_SAVE = 15
