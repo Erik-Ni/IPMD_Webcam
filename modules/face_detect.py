@@ -39,7 +39,7 @@ def face_detect(image, top_data):
 						left, right, up, bottom = firstmodify(startX, endX, startY, endY)
 						left, right, up, bottom = ifoverborder(left, right, up, bottom, w, h)
 						left, right, up, bottom = finalmodify(left, right, up, bottom)
-							
+
 						width = (right - left)
 						height = (bottom - up)
 						f = 0.3
@@ -52,6 +52,6 @@ def face_detect(image, top_data):
 						faces.append([left, up, right, bottom])
 
 						cv2.rectangle(image, (left, up), (right, bottom), green, thickness=line_thick)
-						cv2.putText(image, "{}: {}%".format(top_data[0], top_data[1]), (int(left), int(up)), cv2.FONT_HERSHEY_SIMPLEX, 1, (0,0,255), 2)
+						cv2.putText(image, "{}: {}% - {}: {}%".format(top_data[0], top_data[1], top_data[2], top_data[3]), (int(left), int(up)), cv2.FONT_HERSHEY_SIMPLEX, 1, (0,0,255), 2)
 
 	return image, faces
