@@ -38,7 +38,8 @@ INSTALLED_APPS = [
 	'django.contrib.messages',
 	'django.contrib.staticfiles',
 	'videoTest.upload',
-	'emotion_detector'
+	'emotion_detector',
+	'mood_detector'
 ]
 
 MIDDLEWARE = [
@@ -128,10 +129,14 @@ USE_L10N = True
 USE_TZ = True
 
 # directory to files:
-EMOTION_MODEL = "modules/emotion_models/emotion.h5"
-DEPLOY_PROTOTXT_TXT = "modules/face_models/deploy.prototxt.txt"
-RES_CAFFE_MODEL = "modules/face_models/res10_300x300_ssd_iter_140000.caffemodel"
-EMOTION_FILE = "modules/emotion_file.txt"
+EMOTION_MODEL = "modules/models/emotion.h5"
+MOOD_MODEL = "modules/models/mood.h5"
+DEPLOY_PROTOTXT_TXT = "modules/models/deploy.prototxt.txt"
+RES_CAFFE_MODEL = "modules/models/res10_300x300_ssd_iter_140000.caffemodel"
+POSTED_FILE = "modules/posted_file.txt"
+
 EMOTION_LISTS = ['Anger', 'Contempt', 'Disgust', 'Fear', 'Happy', 'Neutral', 'Sad', 'Surprise']
+MOOD_LISTS = ['Negative', 'Neutral', 'Positive']
+
 NUM_FRAMES_TO_DETECT = 10
 NUM_SECONDS_TO_SAVE = 15
