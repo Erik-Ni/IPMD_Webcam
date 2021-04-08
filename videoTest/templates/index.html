@@ -1,22 +1,13 @@
 <html>
-  <head>
-    <title>Pi Video Surveillance</title>
-  </head>
-  <body>
-  <!--
+<head>
+  <title>Pi Video Surveillance</title>
+</head>
+<body>
+  
     <button onclick="{% url 'video_feed'%}"> Start </button>
-    <button onclick="{% url 'video_stop' %}"> Rect </button>
+    <button onclick="{% url 'rect' %}"> Rect </button>
     <br></br>
     <img src="{% url 'video_feed' %}">
     <br></br>
-  -->
-  <form action="" method="POST">{% csrf_token %}
 
-    <input type="text" name="title" placeholder="Enter Video Title here"><br>
-    <input type="file" name="video" accept="video/*">
-    <button type="submit"> Upload New Video </button>
-
-</form>
-
-  </body>
 </html>
