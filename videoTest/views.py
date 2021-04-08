@@ -52,15 +52,9 @@ class VideoCamera(object):
 			if time_span % settings.NUM_SECONDS_TO_SAVE == 0 and self.saved_time != time_span:
 				log = {}
 				emotions = settings.EMOTION_LISTS
-<<<<<<< HEAD
-				# for i in range(len(emotions)):
-				# 	log[emotions[i]] = int(round(self.all_data[emotions[i]] / self.all_data["count"], 2) * 100)
-				# print_data_to_file(cur_time, log)
-=======
 				for i in range(len(emotions)):
 					log[emotions[i]] = int(round(self.all_data[emotions[i]] / self.all_data["count"], 2) * 100)
 				print_data_to_file(cur_time, log)
->>>>>>> main
 				self.all_data = defaultdict(float)
 				self.saved_time = time_span
 			# How to make rectangle: cv2.rectangle(self.frame, (startX, startY), (endX, endY), Color: (R, G, B), Width)
@@ -85,7 +79,3 @@ def livefeed(request):
 		pass
 
 global_camera = VideoCamera()
-<<<<<<< HEAD
-=======
-
->>>>>>> main
