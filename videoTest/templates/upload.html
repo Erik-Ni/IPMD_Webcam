@@ -1,0 +1,14 @@
+{% block content %}
+ <h2> Upload video </h2>
+ <form method="post" enctype="multipart/form-data">
+   {% csrf_token %}
+   {{ form }}
+   <button type="submit" class="btn btn-primary"> Upload video</button>
+ </form>
+ {% if video %}
+ <video width="500" height="500" preload="none" autoplay="autoplay" controls>
+  <source src="{{ MEDIA_URL }}{{ video }}" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+  {% endif %}
+{% endblock content %}

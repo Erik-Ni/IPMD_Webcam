@@ -18,7 +18,7 @@ from django.conf.urls import url
 from . import views
 
 from django.urls import path
-from videoTest.upload.views import upload_video, display
+from videoTest.upload.views import upload
 
 from django.conf.urls.static import static
 from django.conf import settings
@@ -28,8 +28,7 @@ urlpatterns = [
 	url(r'^$', views.index_view, name='index'),
 	url(r'^livefeed/$', views.livefeed, name='video_feed'),
 	url(r'^make_rectangle/$', views.make_rectangle, name='rect'),
-	path('upload/', upload_video, name='upload'),
-	path('videos/', display, name='videos'),
+	path('upload/', upload, name='video_display'),
 ]
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

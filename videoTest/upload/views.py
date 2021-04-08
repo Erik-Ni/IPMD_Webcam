@@ -1,28 +1,21 @@
-from django.shortcuts import render,redirect
+from django.shortcuts import render, redirect
+from django.views.generic import TemplateView
+from django.core.files.storage import FileSystemStorage
 
-from .models import Videos
+from .forms import VideoForm
+from .models import Video
 
-# Create your views here.
+class Home(TemplateView):
+    template_name = 'index.html'
 
-def upload_video(request):
-
-	if request.method == 'POST':
-
-		title = request.POST['title']
-		video = request.POST['video']
-
-		content = Videos(title=title,video=video)
-		content.save()
-		return redirect('home')
-
-	return render(request,'upload.html')
-
-
-def display(request):
-
-	videos = Videos.objects.all()
-	context ={
-		'videos':videos,
-	}
-
-	return render(request,'videos.html',context)
+def upload(request):
+    if request.method == 'POST':
+        form = VideoForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+    else:
+        form = VideoForm()
+    if request.FILES:
+        return render(request, 'upload.html', {'form': form, 'video': request.FILES['videofile'].name})
+    else:
+        return render(request, 'upload.html', {'form': form, 'video': {}})
