@@ -9,7 +9,8 @@ import threading
 from collections import defaultdict
 
 from modules.face_detect import face_detect
-from modules.emotion_mood_detect import emotion_mood_detect, load_results_to_posted
+from modules.emotion_mood_detect import emotion_mood_detect
+from modules.load_data_to_posted import load_data_to_posted
 from modules.save_logs import print_data_to_file
 
 def index_view(request):
@@ -51,7 +52,7 @@ class VideoCamera(object):
 				self.frame = emotion_mood_detect(self.frame, self.faces, self.top_data, self.all_data)
 
 			if time_span % settings.NUM_SECONDS_TO_SAVE == 0 and self.saved_time != time_span:
-				load_results_to_posted(self.all_data, self.posted)
+				load_data_to_posted(self.all_data, self.posted)
 				print_data_to_file(cur_time, self.posted)
 				self.saved_time = time_span
 
