@@ -17,7 +17,7 @@ def emotion_mood_detect(image, faces, top_data, all_data):
 				roi = image[up:bottom, left:right]
 				roi = cv2.resize(roi, (200, 200), interpolation = cv2.INTER_AREA)
 				output = cv2.cvtColor(roi, cv2.COLOR_BGR2GRAY)
-				temp_output = output/255.
+				temp_output = output / 255.
 				temp_output = np.array([temp_output])
 
 				#emotion
@@ -52,40 +52,8 @@ def emotion_mood_detect(image, faces, top_data, all_data):
 
 
 				cv2.rectangle(image, (left, up), (right, bottom), green, thickness=line_thick)
-				cv2.putText(image, "{}: {}% - {}: {}%".format(top_data[0], top_data[1], top_data[2], top_data[3]), (int(left), int(up)), cv2.FONT_HERSHEY_SIMPLEX, 1, (0,0,255), 2)
+				cv2.putText(image, "{}: {}% - {}: {}%".format(top_data[0], top_data[1], top_data[2], top_data[3]), (int(left), int(up)), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 255), 2)
 			except:
 				pass
 
 	return image
-
-def load_results_to_posted(all_data, posted):
-	emotion_avg, emotion_freq, mood_avg, mood_freq = {}, {}, {}, {}
-
-	for i in range(len(emotions)):
-		if all_data["count"][0] >= 1.00:
-			emotion_avg[emotions[i]] = int(round(all_data[emotions[i]][0] / all_data["count"][0], 2) * 100)
-		else:
-			emotion_avg[emotions[i]] = 0
-
-		if all_data["count"][1] >= 1.00:
-			emotion_freq[emotions[i]] = int(round(all_data[emotions[i]][1] / all_data["count"][1], 2) * 100)
-		else:
-			emotion_freq[emotions[i]] = 0
-
-	for i in range(len(moods)):
-		if all_data["count"][2] >= 1.00:
-			mood_avg[emotions[i]] = int(round(all_data[emotions[i]][2] / all_data["count"][2], 2) * 100)
-		else:
-			mood_avg[emotions[i]] = 0
-
-		if all_data["count"][3] >= 1.00:
-			mood_freq[emotions[i]] = int(round(all_data[emotions[i]][3] / all_data["count"][3], 2) * 100)
-		else:
-			mood_freq[emotions[i]] = 0
-
-	posted["emotion_avg"] = emotion_avg
-	posted["emotion_freq"] = emotion_freq
-	posted["mood_avg"] = mood_avg
-	posted["mood_freq"] = mood_freq
-	
-	all_data = defaultdict(lambda : [0.00, 0.00, 0.00, 0.00])
