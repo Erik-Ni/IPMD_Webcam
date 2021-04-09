@@ -12,4 +12,6 @@ IPMD_webcam/
 !.elasticbeanstalk/*.global.yml
 *.sqlite3
 *.txt
+*.h5
+media/
 Pipfile

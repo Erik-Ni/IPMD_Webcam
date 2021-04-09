@@ -38,6 +38,7 @@ INSTALLED_APPS = [
 	'django.contrib.messages',
 	'django.contrib.staticfiles',
 	'videoTest.upload',
+	'face_detector',
 	'emotion_detector',
 	'mood_detector'
 ]
@@ -139,5 +140,6 @@ POSTED_FILE = "modules/posted_file.txt"
 EMOTION_LISTS = ['Anger', 'Contempt', 'Disgust', 'Fear', 'Happy', 'Neutral', 'Sad', 'Surprise']
 MOOD_LISTS = ['Negative', 'Neutral', 'Positive']
 
+FACE_DETECT_CONFIDENCE = 0.75
 NUM_FRAMES_TO_DETECT = 10
 NUM_SECONDS_TO_SAVE = 15
